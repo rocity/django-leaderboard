@@ -1,4 +1,13 @@
 {% if item %}
     <h1>{{item.item_text}}</h1>
+    {% if error_message %}
+        <p style="color: red;"><strong>{{ error_message }}</strong></p>
+    {% endif %}
     <p>{{item.score}} points</p>
+    <hr>
+    <p>Vote</p>
+    <form action="{% url 'boards:vote' item.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Vote">
+    </form>
 {% endif %}

@@ -1,23 +1,28 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+from django.views import generic
 
 from .models import Item
 
 
 # Create your views here.
-def index(r):
-    items = Item.objects.all()
-    context = {
-        'item_list': items
-    }
+class IndexView(generic.ListView):
+    template_name = 'boards/index.html'
+    context_object_name = 'item_list'
 
-    return render(r, 'boards/index.html', context)
+    def get_queryset(self):
+        return Item.objects.order_by('-created')
 
 
-def detail(r, item_id):
+class DetailView(generic.DetailView):
+    model = Item
+    template_name = 'boards/details.html'
+
+
+def vote(request, item_id):
     item = get_object_or_404(Item, pk=item_id)
-    return render(r, 'boards/details.html', {'item': item})
 
-
-def vote(r, item_id):
-    return HttpResponse("Voting on item %s" % item_id)
+    item.score += 1
+    item.save()
+    return HttpResponseRedirect(reverse('boards:index'))
