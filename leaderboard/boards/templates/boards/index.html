@@ -1,0 +1,11 @@
+{% if item_list %}
+    <ul>
+        {% for item in item_list %}
+            <li>
+                <a href="{% url 'detail' item.id %}">
+                    {{item.item_text}}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
