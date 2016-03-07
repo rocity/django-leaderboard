@@ -1,13 +1,19 @@
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'boards/style.css' %}">
-{% if item_list %}
-    <ul>
-        {% for item in item_list %}
-            <li>
-                <a href="{% url 'boards:detail' item.id %}">
-                    {{item.item_text}}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-{% endif %}
+{% extends "base.html" %}
+
+{% block title %}
+    Item List
+{% endblock title %}
+
+{% block content %}
+    {% if item_list %}
+        <ul>
+            {% for item in item_list %}
+                <li>
+                    <a href="{% url 'boards:detail' item.id %}">
+                        {{item.item_text}}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock content %}
