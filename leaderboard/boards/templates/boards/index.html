@@ -5,15 +5,19 @@
 {% endblock title %}
 
 {% block content %}
-    {% if item_list %}
-        <ul>
-            {% for item in item_list %}
-                <li>
+    <div class="col-sm-6">
+        {% if item_list %}
+            <ul class="list-group">
+                {% for item in item_list %}
+                <li class="list-group-item">
+                    <span class="badge">{{ item.score }}</span>
                     <a href="{% url 'boards:detail' item.id %}">
-                        {{item.item_text}}
+                        {{ item.item_text }}
                     </a>
                 </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
 {% endblock content %}

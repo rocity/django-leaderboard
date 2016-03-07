@@ -15,7 +15,7 @@
         <p>Vote</p>
         <form action="{% url 'boards:vote' item.id %}" method="post">
             {% csrf_token %}
-            <input type="submit" value="Vote">
+            <input class="btn btn-primary" type="submit" value="Vote">
         </form>
     {% endif %}
 {% endblock content %}

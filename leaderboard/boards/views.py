@@ -12,7 +12,7 @@ class IndexView(generic.ListView):
     context_object_name = 'item_list'
 
     def get_queryset(self):
-        return Item.objects.order_by('-created')
+        return Item.objects.order_by('-score')
 
 
 class DetailView(generic.DetailView):
